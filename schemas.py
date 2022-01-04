@@ -88,3 +88,62 @@ class SaleToPurchase(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class PutPurchase(BaseModel):
+
+    product_id: int
+    quantity: int
+    cost: int
+    in_stock: int
+    created_at: datetime
+
+
+    class Config:
+        orm_mode = True
+
+class PutProduct(BaseModel):
+
+    price: int
+
+
+    class Config:
+        orm_mode = True
+
+class PutExepenseFamily(BaseModel):
+
+    service_name: str
+
+
+    class Config:
+        orm_mode = True
+
+class PutCustomer(BaseModel):
+
+    name: str
+    surname: Optional[str]
+    phone_number: Optional[int]
+    email: str
+
+    class Config:
+        orm_mode = True
+
+class PutExpenseItem(BaseModel):
+
+    item_name: str
+    family_id: int
+    cost: int
+
+
+    class Config:
+        orm_mode = True
+
+class PutAssignedExpenseItem(BaseModel):
+
+    item_id: int
+    state: str
+    created_at: datetime
+
+
+    class Config:
+        orm_mode = True
