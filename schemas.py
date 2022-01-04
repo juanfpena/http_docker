@@ -5,7 +5,6 @@ from datetime import datetime
 from pydantic.types import conset
 
 class Sale(BaseModel):
-
     id: Optional[int]
     product_id: int
     quantity: int
@@ -62,7 +61,7 @@ class ExpenseItem(BaseModel):
     id: Optional[int]
     item_name: str
     family_id: int
-    cons: int
+    cost: int
 
 
     class Config:

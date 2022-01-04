@@ -2,11 +2,10 @@
 
 from utils import session
 from SQL_models.models import Product, Purchase, Customer, ExpenseFamily, ExpenseItem, AssignedExpenseItem
-
+import schemas
 
 def insert_into(arguments: list) -> None:
     """Inserts a new row into desired table."""
-
     table_name = arguments[1]
     values = arguments[-1].split(',')
 

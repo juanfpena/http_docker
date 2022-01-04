@@ -2,6 +2,7 @@ from typing import Dict
 from fastapi import FastAPI
 
 from fastapi.params import Depends
+from sqlalchemy.sql.functions import mode
 
 from starlette.responses import RedirectResponse
 
@@ -162,24 +163,31 @@ async def post_sale(sale_input: schemas.Sale) -> Dict:
 
     return sale_input
 
-@app.post("/make_expense_item/expense_item/", tags=["Expense Item Table"])
-async def post_sale(expense_item_inp: schemas.ExpenseItem) -> Dict:
-    
 
-    return sale_input
+#PUT Statements
+@app.put("/update/expense_item/{expense_item_id}", tags=["Expense Item Table"])
+async def post_expense_item(expense_item_id: int, item_inp: schemas.ExpenseItem) -> Dict:
 
-# @app.post("/expense_item/{expense_item_id}/")
-# async def calculator(op_input: schemas.ServiceCalculator) -> Dict:
-#     """
-#     Take a json input with 3 values:
-#     arg1, agr2 and operation_type
-#     then return the result in a json format
-#     """
-#     try:
-#         operation_resul = analize_func({"a": op_input.arg1, "b":op_input.arg2, "op_type": op_input.op_type})
-#     except ValueError:
-#         return HTTPException(422, "Bad input")
-#     return {"resul": operation_resul}
+    session.query(models.ExpenseItem).filter(models.ExpenseItem.id == expense_item_id).update(
+        {"item_name": item_inp.item_name, "family_id": item_inp.family_id, "cost": item_inp.cost})
+    session.commit()
+    return True
+
+@app.put("/update/purchase/{purchase_id}", tags=["Purchase Table"])
+async def post_expense_item(purchase_id: int, purchase_inp: schemas.ExpenseItem) -> Dict:
+
+    session.query(models.ExpenseItem).filter(models.ExpenseItem.id == expense_item_id).update(
+        {"item_name": item_inp.item_name, "family_id": item_inp.family_id, "cost": item_inp.cost})
+    session.commit()
+    return True
+
+@app.put("/update/product/{product_id}", tags=["Product Table"])
+async def post_expense_item(expense_item_id: int, item_inp: schemas.ExpenseItem) -> Dict:
+
+    session.query(models.ExpenseItem).filter(models.ExpenseItem.id == expense_item_id).update(
+        {"item_name": item_inp.item_name, "family_id": item_inp.family_id, "cost": item_inp.cost})
+    session.commit()
+    return True
 
 # @app.post("/assigned_expense_item/{assigned_expense_item_id}/")
 # async def calculator(op_input: schemas.ServiceCalculator) -> Dict:
