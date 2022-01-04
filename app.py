@@ -43,7 +43,6 @@ app.add_middleware(
 )
 
 
-
 @app.get("/")
 async def main():
     return RedirectResponse(url="/docs")
@@ -167,7 +166,7 @@ async def get_sale_to_pur_row(stp_id: int, db: Session = Depends(get_db)) -> Dic
     return sale_to_pur
 
 
-#POST Statements
+# POST Statements
 
 @app.post("/sale/make_sale/", tags=["Sale Table"])
 async def create_sale(sale_input: schemas.Sale) -> Dict:
@@ -179,14 +178,14 @@ async def create_sale(sale_input: schemas.Sale) -> Dict:
 @app.post("/expense_item/make_item/", tags=['Expense Item Table'])
 async def create_expense_item(input: schemas.ExpenseItem) -> Dict:
     insert_into(models.ExpenseItem(item_name=input.item_name,
-                                      family_id=input.family_id, cost=input.cost))
+                                   family_id=input.family_id, cost=input.cost))
     return input
 
 
 @app.post("/assigned_expense_item/make_assei/", tags=['Assigned Expense Item Table'])
 async def create_assigned_expense_item(input: schemas.AssignedExpenseItem) -> Dict:
     insert_into(models.AssignedExpenseItem(
-                    item_id=input.item_id, state=input.state, created_at=input.created_at))
+        item_id=input.item_id, state=input.state, created_at=input.created_at))
 
     return input
 
@@ -194,8 +193,8 @@ async def create_assigned_expense_item(input: schemas.AssignedExpenseItem) -> Di
 @app.post("/purchase/make_purchase/", tags=['Purchase Table'])
 async def create_purchase(input: schemas.Purchase) -> Dict:
     insert_into(models.Purchase(product_id=input.product_id, quantity=input.quantity,
-                                   cost=input.cost, in_stock=input.in_stock, created_at=input.created_at)
-)
+                                cost=input.cost, in_stock=input.in_stock, created_at=input.created_at)
+                )
 
     return input
 
@@ -203,55 +202,69 @@ async def create_purchase(input: schemas.Purchase) -> Dict:
 @app.post("/customer/make_customer/", tags=['Customer Table'])
 async def create_customer(input: schemas.Customer) -> Dict:
     insert_into(models.Customer(name=input.name, surname=input.surname,
-                                   phone_number=input.phone_number, email=input.email))
+                                phone_number=input.phone_number, email=input.email))
 
     return input
 
 
 @app.post("/product/make_product", tags=['Product Table'])
 async def create_product(input: schemas.Product) -> Dict:
-    insert_into(models.Product(price = input.price))
+    insert_into(models.Product(price=input.price))
 
     return input
+
 
 @app.post("/expense_family/make_family/", tags=["Expense Family Table"])
 async def create_family(input: schemas.ExepenseFamily) -> Dict:
     insert_into(models.ExpenseFamily(service_name=input.service_name)
-)
+                )
 
     return input
 
 
+@app.post("/product/{product_id}/", tags=['Product Table'])
+async def create_product(op_input: schemas.Product) -> Dict:
+    insert_into(op_input)
 
-#PUT Statements
+    return op_input
+
+# PUT request
+
+
+@app.put("/sale/{sale_id}/")
+async def calculator(op_input: schemas.ServiceCalculator) -> Dict:
+    pass
 
 
 @app.put("/expense_item/update/{expense_item_id}", tags=["Expense Item Table"])
 async def put_expense_item(expense_item_id: int, inp: schemas.PutExpenseItem) -> Boolean:
     session.query(models.ExpenseItem).filter(models.ExpenseItem.id == expense_item_id).update(
-                {'item_name': inp.item_name, 'family_id': inp.family_id, 'cost': inp.cost}
-            )
+        {'item_name': inp.item_name, 'family_id': inp.family_id, 'cost': inp.cost}
+    )
     session.commit()
-   
+
     return True
+
 
 @app.put("/purchase/update/{purchase_id}", tags=["Purchase Table"])
 async def post_expense_item(purchase_id: int, inp: schemas.PutPurchase) -> Boolean:
 
     session.query(models.Purchase).filter(models.Purchase.id == purchase_id).update(
-                {'product_id': inp.product_id, 'quantity': inp.quantity, 'cost': inp.cost,
-                    'in_stock': inp.in_stock, 'created_at': inp.created_at}
-            )
+        {'product_id': inp.product_id, 'quantity': inp.quantity, 'cost': inp.cost,
+         'in_stock': inp.in_stock, 'created_at': inp.created_at}
+    )
     session.commit()
     return True
+
 
 @app.put("/product/update/{product_id}", tags=["Product Table"])
 async def post_expense_item(product_id: int, inp: schemas.PutProduct) -> Boolean:
 
     session.query(models.Product).filter(
-                models.Product.id == product_id).update({'price': inp.price})
+        models.Product.id == product_id).update({'price': inp.price})
     session.commit()
     return True
+
 
 @app.put("/expense_family/update/{family_id}", tags=["Expense Family Table"])
 async def post_expense_item(family_id: int, inp: schemas.PutExepenseFamily) -> Boolean:
@@ -262,22 +275,24 @@ async def post_expense_item(family_id: int, inp: schemas.PutExepenseFamily) -> B
     session.commit()
     return True
 
+
 @app.put("/customer/update/{customer_id}", tags=["Customer Table"])
 async def post_expense_item(customer_id: int, inp: schemas.PutCustomer) -> Boolean:
 
     session.query(models.Customer).filter(models.Customer.id == customer_id).update(
-                {'name': inp.name, 'surname': inp.surname, 'email': inp.email, 'phone_number': inp.phone_number})
+        {'name': inp.name, 'surname': inp.surname, 'email': inp.email, 'phone_number': inp.phone_number})
 
     session.commit()
     return True
+
 
 @app.put("/assigned_expense_item/update/{assei_id}", tags=["Assigned Expense Item Table"])
 async def post_expense_item(assei_id: int, inp: schemas.PutAssignedExpenseItem) -> Boolean:
 
     session.query(models.AssignedExpenseItem).filter(models.AssignedExpenseItem.id == id).update(
-                {'item_id': inp.item_id, 'state': inp.state, 'created_at': inp.created_at}
-            )
-            
+        {'item_id': inp.item_id, 'state': inp.state, 'created_at': inp.created_at}
+    )
+
     session.commit()
     return True
 
