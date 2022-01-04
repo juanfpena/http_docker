@@ -1,7 +1,7 @@
 """Inserts new row into desired table."""
 
 from utils import session
-from models import Product, Purchase, Customer, ExpenseFamily, ExpenseItem, AssignedExpenseItem
+from SQL_models.models import Product, Purchase, Customer, ExpenseFamily, ExpenseItem, AssignedExpenseItem
 
 
 def insert_into(arguments: list) -> None:

@@ -1,5 +1,5 @@
 from utils import session
-from models import Product, Purchase, Customer, ExpenseItem, ExpenseFamily, AssignedExpenseItem
+from SQL_models.models import Product, Purchase, Customer, ExpenseItem, ExpenseFamily, AssignedExpenseItem
 
 
 def update_row(arguments: list) -> None:

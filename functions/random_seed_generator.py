@@ -3,7 +3,7 @@ import random
 import string
 import datetime
 from typing import Dict, List, Union
-from CLI_commnd.create_sale import sale_creator
+from CLI_command.create_sale import sale_creator
 
 
 def random_expense_family_engine(num_families: int) -> list[dict]:
