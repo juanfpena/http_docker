@@ -8,7 +8,6 @@ class Sale(BaseModel):
 
     id: Optional[int]
     product_id: int
-    created_at: datetime
     quantity: int
     customer_id: int
 

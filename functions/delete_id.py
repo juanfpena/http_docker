@@ -1,5 +1,5 @@
 from utils import session
-from models import Purchase, Customer, AssignedExpenseItem, ExpenseItem, ExpenseFamily, Product
+from SQL_models.models import Purchase, Customer, AssignedExpenseItem, ExpenseItem, ExpenseFamily, Product
 from sqlalchemy import delete
 
 

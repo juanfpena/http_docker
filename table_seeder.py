@@ -3,7 +3,7 @@
 
 from utils import session
 
-import models
+import SQL_models.models as models
 
 from functions.random_seed_generator import random_sale_creator_engine, random_customer_engine, random_purchase_engine, random_assigned_expense_item_engine, random_expense_item_engine, random_product_engine
 
