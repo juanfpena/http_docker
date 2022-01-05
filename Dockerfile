@@ -1,6 +1,7 @@
 FROM python:3.9-slim-buster
 WORKDIR /app/sqlchallenge
 RUN apt-get update
+RUN apt-get install libssl-dev
 RUN apt-get install -y default-libmysqlclient-dev python3-mysqldb
 COPY requirements.txt /app/sqlchallenge/requirements.txt
 RUN python -m pip install -r requirements.txt

@@ -226,11 +226,6 @@ async def create_product(op_input: schemas.Product) -> Dict:
 # PUT request
 
 
-@app.put("/sale/{sale_id}/")
-async def calculator(op_input: schemas.ServiceCalculator) -> Dict:
-    pass
-
-
 @app.put("/expense_item/update/{expense_item_id}", tags=["Expense Item Table"])
 async def put_expense_item(expense_item_id: int, inp: schemas.PutExpenseItem) -> Boolean:
     session.query(models.ExpenseItem).filter(models.ExpenseItem.id == expense_item_id).update(
