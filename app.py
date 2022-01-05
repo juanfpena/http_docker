@@ -1,26 +1,21 @@
+from functions.create_sale import sale_creator
+from SQL_models import models
+from sqlalchemy.orm.session import Session
+from utils import session
+import uvicorn
+from fastapi.middleware.cors import CORSMiddleware
+import schemas
+from starlette.responses import RedirectResponse
+from functions.insert_into import insert_into
+from fastapi.params import Depends
+from fastapi import FastAPI
+from sqlalchemy.sql.sqltypes import Boolean
 from typing import Dict
 
-from sqlalchemy.sql.sqltypes import Boolean
 
-from fastapi import FastAPI
+import pymysql
+pymysql.install_as_MySQLdb()
 
-from fastapi.params import Depends
-from functions.insert_into import insert_into
-
-from starlette.responses import RedirectResponse
-
-import schemas
-
-from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
-
-from utils import session
-
-from sqlalchemy.orm.session import Session
-
-from SQL_models import models
-
-from functions.create_sale import sale_creator
 
 app = FastAPI(title="FastAPI Project",
               description="Hello World con FastAPI")
@@ -73,9 +68,9 @@ async def get_expense_item_row(db: Session = Depends(get_db)) -> Dict:
 
 @app.get("/assigned_expense_item/select/", tags=["Assigned Expense Item Table"])
 async def get_assei_row(db: Session = Depends(get_db)) -> Dict:
-    assei = db.query(models.AssignedExpenseItem).all()
+    assigned_expense_items = db.query(models.AssignedExpenseItem).all()
 
-    return assei
+    return assigned_expense_items
 
 
 @app.get("/purchase/select/", tags=["Purchase Table"])
