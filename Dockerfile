@@ -1,11 +1,11 @@
-FROM python:3.9-slim-buster
-WORKDIR /app/sqlchallenge
+FROM python:3.8.12-slim-buster
+WORKDIR /usr/src/sqlchallenge/
 RUN apt-get update
 RUN apt-get install -y default-libmysqlclient-dev python3-mysqldb
-COPY requirements.txt /app/sqlchallenge/requirements.txt
-RUN python -m pip install -r requirements.txt
-ADD . /app/sqlchallenge/
-RUN python setup.py install
+COPY requirements.txt /usr/src/sqlchallenge/
+RUN python3.8 -m pip install -r requirements.txt
+ADD . /usr/src/sqlchallenge/
+RUN python3.8 setup.py install
 EXPOSE 8000
-WORKDIR /app
-CMD ['gunicorn', '-k', 'uvicorn.workers.UvicornWorker', 'sqlchallenge.app:app', '-b', '0.0.0.0:8000', '--workers=4']
+WORKDIR /usr/src
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "pokemonrestapp.app:app", "-b", "0.0.0.0:8000", "--workers=4"]
