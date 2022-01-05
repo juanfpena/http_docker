@@ -1,6 +1,16 @@
 """Creates views in database using statements in '.sql' files"""
-from utils import engine
-import SQL_models.models as models
+from sqlalchemy import create_engine
+import os
+
+user = os.environ.get('MYSQL_USER')
+password = os.environ.get('MYSQL_PASSWORD')
+host = os.environ.get('MYSQL_HOST')
+port = os.environ.get('MYSQL_PORT')
+db = os.environ.get('MYSQL_DB_NAME')
+
+engine = create_engine(
+    f'mysql+mysqlconnector://{user}:{password}@{host}:{port}/{db}'
+)
 
 income_statement_by_month = "SQL_views/income_statement_by_month.sql"
 income_statement_by_year = "SQL_views/income_statement_by_year.sql"

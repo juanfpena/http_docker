@@ -14,7 +14,7 @@ itsdangerous==2.0.1
 Jinja2==3.0.3
 MarkupSafe==2.0.1
 mysql-connector-python==8.0.27
-# mysqlclient==2.1.0
+mysqlclient==2.1.0
 orjson==3.6.4
 protobuf==3.19.1
 pydantic==1.8.2
@@ -36,3 +36,4 @@ watchgod==0.7
 websockets==10.1
 Werkzeug==2.0.2
 wincertstore==0.2
+gunicorn

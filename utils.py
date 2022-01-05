@@ -1,19 +1,15 @@
 """This file set the connection with the database """
-
-from sqlalchemy.ext.declarative import declarative_base
-
-from sqlalchemy import create_engine
-
 import mysql.connector
 
 from sqlalchemy.orm import sessionmaker
+import os
 
 
-user = 'root'
-password = "root2021"
-host = 'localhost'
-port = '3306'
-db_name = 'sql_challenge'
+user = os.environ.get('MYSQL_USER')
+password = os.environ.get('MYSQL_PASSWORD')
+host = os.environ.get('MYSQL_HOST')
+port = os.environ.get('MYSQL_PORT')
+db_name = os.environ.get('MYSQL_DB_NAME')
 
 
 def db_creator(database_name):
@@ -28,12 +24,6 @@ def db_creator(database_name):
 
 
 db = db_creator(db_name)
-
-engine = create_engine(
-    f'mysql+mysqlconnector://{user}:{password}@{host}:{port}/{db}'
-)
-
-Base = declarative_base()
 
 Session = sessionmaker(engine)
 session = Session()
