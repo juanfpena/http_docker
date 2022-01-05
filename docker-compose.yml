@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   webapp:
-    image: docker_http:latest
+    image: dockerhttp:latest
     build:
       context: .
       dockerfile: Dockerfile
