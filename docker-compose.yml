@@ -1,8 +1,8 @@
 version: '3.3'
 
 services:
-  webapp:
-    image: dockerhttp:latest
+  httpserver:
+    image: sqlchallenge:latest
     build:
       context: .
       dockerfile: Dockerfile
