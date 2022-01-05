@@ -10,7 +10,7 @@ from sqlalchemy.orm import sessionmaker
 
 
 user = 'root'
-password = "123456"
+password = "root2021"
 host = 'localhost'
 port = '3306'
 db_name = 'sql_challenge'
