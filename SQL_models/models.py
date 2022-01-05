@@ -4,7 +4,9 @@ from datetime import datetime
 
 
 from sqlalchemy.sql.schema import CheckConstraint, ForeignKey
-from utils import Base
+
+from sqlalchemy.ext.declarative import declarative_base
+Base = declarative_base()
 
 
 class Product(Base):
