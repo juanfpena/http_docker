@@ -1,7 +1,6 @@
 """Defines sale creation function and links it to a batch utilizing FIFO exit method."""
 from datetime import datetime
 from logging import raiseExceptions
-from types import NoneType
 from SQL_models.models import Sale, SaleToPurchase, Purchase
 
 from utils import session
@@ -33,9 +32,9 @@ def batch_iterator(quantity: int, batches: list[tuple[int]]) -> None:
     modified_purchases = []
 
     for id, stock in batches:
-        
+
         original_stock = stock
-        
+
         if stock <= quantity:
 
             quantity -= original_stock
@@ -59,9 +58,10 @@ def batch_iterator(quantity: int, batches: list[tuple[int]]) -> None:
 def sale_creator(arguments: list[int, str]) -> None:
     """Registers a sale in the destination database."""
     if type(arguments) != schemas.Sale:
-        product_id, quantity_to_buy, customer_id = argument_parser_sales(argv=arguments)
+        product_id, quantity_to_buy, customer_id = argument_parser_sales(
+            argv=arguments)
         created_at = datetime.now()
-        
+
     if type(arguments) == schemas.Sale:
         product_id = arguments.product_id
         created_at = datetime.now()
@@ -69,18 +69,19 @@ def sale_creator(arguments: list[int, str]) -> None:
         customer_id = arguments.customer_id
 
     batches = session.query(Purchase.id, Purchase.in_stock).filter(
-        Purchase.product_id == product_id,Purchase.in_stock > 0
-        ).order_by(Purchase.created_at.asc()).all()
+        Purchase.product_id == product_id, Purchase.in_stock > 0
+    ).order_by(Purchase.created_at.asc()).all()
     # Batches are returned in ascending order (filtered by created_at) for FIFO exit method.
     try:
         new_batches, used_stock = batch_iterator(
             quantity=quantity_to_buy, batches=batches)
         transaction_state = 1
     except TypeError:
-        print(f"Transaction failed \n>> product_id({product_id}), quantity({quantity_to_buy}), customer_id({customer_id}), date({created_at})")
+        print(
+            f"Transaction failed \n>> product_id({product_id}), quantity({quantity_to_buy}), customer_id({customer_id}), date({created_at})")
         print("\n")
         transaction_state = 0
-    
+
     if transaction_state == 1:
         """Gets batches necessary to fulfill the quantity required by the sale and modifies stock in those rows."""
         for i in range(len(new_batches)):
