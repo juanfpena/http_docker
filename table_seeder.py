@@ -5,7 +5,7 @@ from custom.SQL_models.utils import session
 
 import custom.SQL_models.models as models
 
-from random_seed_generator import random_sale_creator_engine, random_customer_engine, random_purchase_engine, random_assigned_expense_item_engine, random_expense_item_engine, random_product_engine
+from custom.functions.random_seed_generator import random_sale_creator_engine, random_customer_engine, random_purchase_engine, random_assigned_expense_item_engine, random_expense_item_engine, random_product_engine
 
 
 """Seeds database with random values used for testing purposes."""

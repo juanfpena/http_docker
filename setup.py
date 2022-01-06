@@ -6,7 +6,9 @@ setup(
     author="Carlos Gitto & Juan Peña",
     author_email="carlosgitto98@gmail.com & juanfacundopena@gmail.com",
     packages=[
-        "custom"
+        "custom",
+        "custom.functions",
+        "custom.SQL_models"
     ],
     description="useful functions and engine",
     long_description=open("README.md").read(),
