@@ -2,7 +2,7 @@ from typing import Optional
 from pydantic import BaseModel
 from datetime import datetime
 
-from pydantic.types import conset
+
 
 class Sale(BaseModel):
     id: Optional[int]

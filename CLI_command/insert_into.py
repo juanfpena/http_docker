@@ -1,6 +1,6 @@
 """Inserts value into desired table."""
 
-from functions.insert_into import insert_into
+from custom.functions.insert_into import insert_into
 import sys
 
 if __name__ == '__main__':

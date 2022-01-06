@@ -1,6 +1,6 @@
 """Drops views from the database."""
 
-from functions.drop_views import drop_all_views
+from custom.functions.drop_views import drop_all_views
 
 
 if __name__ == "__main__":

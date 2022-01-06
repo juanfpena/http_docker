@@ -1,6 +1,5 @@
-from utils import session
-from SQL_models.models import Purchase, Customer, AssignedExpenseItem, ExpenseItem, ExpenseFamily, Product
-from sqlalchemy import delete
+from custom.SQL_models.utils import session
+from custom.SQL_models.models import Purchase, Customer, AssignedExpenseItem, ExpenseItem, ExpenseFamily, Product
 
 
 def delete_id(arguments: list) -> None:

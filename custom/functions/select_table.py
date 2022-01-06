@@ -2,7 +2,7 @@
 """Displays tables in CLI."""
 
 
-from utils import engine
+from custom.SQL_models.utils import engine
 import pandas as pd
 tables = [
     'sale',

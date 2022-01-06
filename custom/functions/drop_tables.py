@@ -1,7 +1,7 @@
 """Drops tables from database."""
 
-from utils import engine, Base
-import SQL_models.models as models
+from custom.SQL_models.utils import engine, Base
+import custom.SQL_models.models as models
 
 
 def table_dropper() -> None:

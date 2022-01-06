@@ -1,6 +1,6 @@
 """Drops views from de database."""
 
-from utils import engine
+from custom.SQL_models.utils import engine
 
 list_of_views = [
     "income_by_month",

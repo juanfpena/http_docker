@@ -1,12 +1,12 @@
-from functions.create_sale import sale_creator
-from SQL_models import models
+from custom.functions.create_sale import sale_creator
+from custom.SQL_models import models
 from sqlalchemy.orm.session import Session
-from utils import session
+from custom.SQL_models.utils import session
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 import schemas
 from starlette.responses import RedirectResponse
-from functions.insert_into import insert_into
+from custom.functions.insert_into import insert_into
 from fastapi.params import Depends
 from fastapi import FastAPI
 from sqlalchemy.sql.sqltypes import Boolean

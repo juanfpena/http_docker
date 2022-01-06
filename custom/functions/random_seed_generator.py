@@ -2,8 +2,8 @@
 import random
 import string
 import datetime
-from typing import Dict, List, Union
-from CLI_command.create_sale import sale_creator
+from typing import List
+from custom.functions.create_sale import sale_creator
 
 
 def random_expense_family_engine(num_families: int) -> list[dict]:
@@ -132,37 +132,6 @@ def random_product_engine(num_products: int) -> list[dict]:
         }
         my_list.append(random_row)
     return my_list
-
-
-# def random_sale_engine(num_sales: int, product: list, customer: list) -> list[dict]:
-#     """Creates list of json objects to seed sale table for testing purposes."""
-
-#     my_list = []
-#     num_product = len(product)
-#     num_customer = len(customer)
-
-#     for i in range(num_sales):
-#         product_id = random.randint(1, num_product)
-#         created_at = datetime.datetime(
-#             random.randint(2010, 2021),
-#             random.randint(1, 12),
-#             random.randint(1, 28),
-#             random.randint(1, 23),
-#             random.randint(1, 59),
-#             random.randint(1, 59)
-#         )
-#         quantity = random.randint(1, 500)
-#         customer_id = random.randint(1, num_customer)
-
-#         random_row = {
-#             "product_id": product_id,
-#             "created_at": created_at,
-#             "quantity": quantity,
-#             "customer_id": customer_id
-#         }
-
-#         my_list.append(random_row)
-#     return my_list
 
 
 def random_customer_engine(num_customer: int) -> list[dict]:

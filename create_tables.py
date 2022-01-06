@@ -1,5 +1,5 @@
 """File that create tables in the database"""
-from functions.create_tables import table_creator
+from custom.functions.create_tables import table_creator
 
 """Create all tables"""
 

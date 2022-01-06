@@ -1,6 +1,6 @@
 """Creates views in the database."""
 
-from functions.create_views import view_generator
+from custom.functions.create_views import view_generator
 
 
 if __name__ == "__main__":

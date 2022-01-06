@@ -1,9 +1,10 @@
 """Defines sale creation function and links it to a batch utilizing FIFO exit method."""
 from datetime import datetime
-from logging import raiseExceptions
-from SQL_models.models import Sale, SaleToPurchase, Purchase
 
-from utils import session
+from typing import Tuple, List
+from custom.SQL_models.models import Sale, SaleToPurchase, Purchase
+
+from custom.SQL_models.utils import session
 import sys
 import schemas
 
@@ -23,7 +24,7 @@ def argument_parser_sales(argv: list[str]) -> list[int, str]:
     return [int(i) for i in parsed_arguments]
 
 
-def batch_iterator(quantity: int, batches: list[tuple[int]]) -> None:
+def batch_iterator(quantity: int, batches: List[Tuple[int]]) -> Tuple[List[int], List[int]]:
     """Iterates through batches to check which ones should be modified and by what quantity."""
 
     batches = [list(i) for i in batches]
