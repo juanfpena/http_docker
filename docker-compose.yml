@@ -9,25 +9,24 @@ services:
       dockerfile: Dockerfile
 
     ports:
-      - '8000:8000'
+      - "8000:8000"
 
     environment:
       - DB_CONN_STRING=mysql+mysqlconnector://root:123456@mysql:3306/sql_challenge
       - MYSQL_USER=root
       - MYSQL_HOST=mysql
-      - MYSQL_PORT=3306
+      - MYSQL_MASTER_PORT_NUMBER=3306
       - MYSQL_DB_NAME=sql_challenge
+      - ALLOWED_ORIGINS=http://localhost,http://localhost:8080,http://localhost:3000,https://pensive-raman-3248b3.netlify.app
 
     depends_on:
       - mysql
 
   mysql: #-> mysql:3306
     image: "bitnami/mysql:latest"
+    
     environment:
-      
       - ALLOW_EMPTY_PASSWORD=yes
 
     ports:
       - '3306:3306'
-    
-
