@@ -6,7 +6,7 @@ from custom.SQL_models.models import Sale, SaleToPurchase, Purchase
 
 from custom.SQL_models.utils import session
 import sys
-import schemas
+
 
 arguments = sys.argv
 
@@ -58,12 +58,12 @@ def batch_iterator(quantity: int, batches: List[Tuple[int]]) -> Tuple[List[int],
 
 def sale_creator(arguments: list[int, str]) -> None:
     """Registers a sale in the destination database."""
-    if type(arguments) != schemas.Sale:
+    if type(arguments) == list:
         product_id, quantity_to_buy, customer_id = argument_parser_sales(
             argv=arguments)
         created_at = datetime.now()
 
-    if type(arguments) == schemas.Sale:
+    if type(arguments) != list:
         product_id = arguments.product_id
         created_at = datetime.now()
         quantity_to_buy = arguments.quantity

@@ -4,7 +4,7 @@ from sqlalchemy.orm.session import Session
 from custom.SQL_models.utils import session
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
-import schemas
+import custom.SQL_models.schemas as schemas
 from starlette.responses import RedirectResponse
 from custom.functions.insert_into import insert_into
 from fastapi.params import Depends
@@ -225,10 +225,6 @@ async def create_product(op_input: schemas.Product) -> Dict:
 
 # PUT request
 
-
-@app.put("/sale/{sale_id}/")
-async def calculator(op_input: schemas.ServiceCalculator) -> Dict:
-    pass
 
 
 @app.put("/expense_item/update/{expense_item_id}", tags=["Expense Item Table"])
