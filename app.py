@@ -1,3 +1,4 @@
+from sqlalchemy.sql.expression import delete
 from custom.functions.create_sale import sale_creator
 from custom.SQL_models import models
 from sqlalchemy.orm.session import Session
@@ -6,6 +7,7 @@ import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 import custom.SQL_models.schemas as schemas
 from starlette.responses import RedirectResponse
+from custom.functions.delete_id import delete_id
 from custom.functions.insert_into import insert_into
 from fastapi.params import Depends
 from fastapi import FastAPI
@@ -226,7 +228,6 @@ async def create_product(op_input: schemas.Product) -> Dict:
 # PUT request
 
 
-
 @app.put("/expense_item/update/{expense_item_id}", tags=["Expense Item Table"])
 async def put_expense_item(expense_item_id: int, inp: schemas.PutExpenseItem) -> Boolean:
     session.query(models.ExpenseItem).filter(models.ExpenseItem.id == expense_item_id).update(
@@ -287,6 +288,47 @@ async def post_expense_item(assei_id: int, inp: schemas.PutAssignedExpenseItem) 
     session.commit()
     return True
 
+
+@app.delete("/expense_item/delete/{expense_item_id}", tags=["Expense Item Table"])
+async def delete_expense_item(expense_item_id: int, inp: schemas.ExpenseItem) -> Boolean:
+    delete_id(['expense_item', expense_item_id])
+
+    return True
+
+
+@app.delete("/expense_family/delete/{expense_family_id}", tags=["Expense Family Table"])
+async def delete_expense_item(expense_family_id: int, inp: schemas.ExepenseFamily) -> Boolean:
+    delete_id(['expense_family', expense_family_id])
+
+    return True
+
+
+@app.delete("/expense_family/delete/{expense_family_id}", tags=["Expense Family Table"])
+async def delete_family(expense_family_id: int, inp: schemas.ExepenseFamily) -> Boolean:
+    delete_id(['expense_family', expense_family_id])
+
+    return True
+
+
+@app.delete("/purchase/delete/{purchase_id}", tags=["Purchase Table"])
+async def delete_purchase(purchase_id: int, inp: schemas.Purchase) -> Boolean:
+    delete_id(['purchase', purchase_id])
+
+    return True
+
+
+@app.delete("/product/delete/{product_id}", tags=["Product Table"])
+async def delete_product(product_id: int, inp: schemas.Product) -> Boolean:
+    delete_id(['product', product_id])
+
+    return True
+
+
+@app.delete("/sale/delete/{sale_id}", tags=["Sale Table"])
+async def delete_sale(sale_id: int, inp: schemas.Sale) -> Boolean:
+    delete_id(['sale', sale_id])
+
+    return True
 
 if __name__ == "__main__":
     uvicorn.run(f"{__name__}:app", host="127.0.0.1", port=8000, reload=True)
