@@ -26,6 +26,7 @@ services:
     environment:
       
       - ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=sql_challenge
 
     ports:
       - '3306:3306'
