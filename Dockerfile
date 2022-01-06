@@ -10,4 +10,3 @@ RUN python setup.py install
 EXPOSE 8000
 WORKDIR /usr/src/
 CMD ["uvicorn", "sqlchallenge.app:app", "--host", "0.0.0.0", "--port", "8000"]
-# gunicorn -k uvicorn.workers.UvicornWorker sqlchallenge.app:app -b 0.0.0.0:8000 --workers=4

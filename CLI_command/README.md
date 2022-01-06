@@ -1,41 +1,9 @@
-# Raw SQL challenge - SQLAlchemy
+# CLI-commands
 
-The objective of this challenge was to create a command line application simulating a regular business's activity. The resulting application runs on MySQL and uses SQLAlchemy's library for interacting with such database manager using the Python programming language.
-
-## Requirements
-
-Please before start, check you have install 'python 3.10.0' and be sure to check the "requirements.txt" file
-
-## Runing with perzonaliced settings
-
-To define your own user, password, host, port and database name (db_name), change the variables in *utils.py* file or you can use the default values
-
-Then follow the steps
-
-## Step 1
-
-### Build the database, tables and views
+### To select the table or the view you want to see
 
 ```
-python make_all_tables.py
-
-python make_all_views.py
-```
-
-## Step 2
-
-### Fill tables with random Data
-
-```
-python table_seeder.py
-```
-
-## Step 3
-
-### Select the table or the view you want to see
-
-```
-python select_table.py [arg]*
+python -m CLI_command.select_table [arg]*
 ```
 
     *[arg] is the name of the table you wish to see:
@@ -53,7 +21,7 @@ python select_table.py [arg]*
     all      >> all tables
 
 ```
-python select_view.py [arg1] [arg2]**
+python -m CLI_command.select_view [arg1] [arg2]**
 ```
 
     
@@ -73,11 +41,11 @@ python select_view.py [arg1] [arg2]**
 
     all     >>  all views
 
-### Optional Step
-## Sales creation
+
+### To create a sale
 
 ```
-python create_sale.py [args]**
+python -m CLI_command.create_sale [args]**
 ```
 
     ** Args consist of values for columns in the sales table.
@@ -89,13 +57,28 @@ python create_sale.py [args]**
 
 This script also modifies all tables related to sales.
 
-## Restart
+### To delete by id
+
 
 ```
-python drop_all_views.py
-
-python drop_all_tables.py
+python -m  CLI_command.delete_id [arg1] [arg2]
 ```
+[arg1] : table name
+[arg2] : id
 
-### Go to Step 1
+### To insert
 
+```
+python -m  CLI_command.insert [arg1] [args2]
+```
+[arg1] : table name
+[args2] : values of each column
+   
+### To update
+
+```
+python -m  CLI_command.update_id [arg1] [arg2] [args3]
+```
+[arg1] : table name
+[arg2] : id
+[args3] : values of each column
