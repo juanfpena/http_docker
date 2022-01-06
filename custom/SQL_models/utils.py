@@ -1,9 +1,8 @@
 """This file set the connection with the database """
 import mysql.connector
-
 from sqlalchemy.orm import sessionmaker
 import os
-
+from sqlalchemy import create_engine
 
 user = os.environ.get('MYSQL_USER')
 password = os.environ.get('MYSQL_PASSWORD')
@@ -24,6 +23,9 @@ def db_creator(database_name):
 
 
 db = db_creator(db_name)
+engine = create_engine(
+    f'mysql+mysqlconnector://{user}:{password}@{host}:{port}/{db}'
+)
 
 Session = sessionmaker(engine)
 session = Session()

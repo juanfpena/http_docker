@@ -1,6 +1,6 @@
 """Deletes id from specified table."""
 
-from functions.delete_id import delete_id
+from custom.functions.delete_id import delete_id
 import sys
 
 if __name__ == '__main__':

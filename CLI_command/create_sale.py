@@ -1,6 +1,6 @@
 """Creates sale given arguments."""
 
-from functions.create_sale import sale_creator
+from custom.functions.create_sale import sale_creator
 import sys
 
 arguments = sys.argv

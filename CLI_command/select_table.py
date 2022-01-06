@@ -1,5 +1,5 @@
 """This file selects table/s to show"""
-from functions.select_table import show_table
+from custom.functions.select_table import show_table
 import sys
 
 

@@ -1,12 +1,12 @@
-from functions.create_sale import sale_creator
-from SQL_models import models
+from custom.functions.create_sale import sale_creator
+from custom.SQL_models import models
 from sqlalchemy.orm.session import Session
-from utils import session
+from custom.SQL_models.utils import session
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 import schemas
 from starlette.responses import RedirectResponse
-from functions.insert_into import insert_into
+from custom.functions.insert_into import insert_into
 from fastapi.params import Depends
 from fastapi import FastAPI
 from sqlalchemy.sql.sqltypes import Boolean
@@ -224,6 +224,11 @@ async def create_product(op_input: schemas.Product) -> Dict:
     return op_input
 
 # PUT request
+
+
+@app.put("/sale/{sale_id}/")
+async def calculator(op_input: schemas.ServiceCalculator) -> Dict:
+    pass
 
 
 @app.put("/expense_item/update/{expense_item_id}", tags=["Expense Item Table"])

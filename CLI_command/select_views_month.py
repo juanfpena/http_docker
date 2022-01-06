@@ -1,5 +1,5 @@
 """Select and show tables views"""
-from functions.select_views_month import view_selector
+from custom.functions.select_views_month import view_selector
 import sys
 
 

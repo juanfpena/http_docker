@@ -1,7 +1,7 @@
 """Inserts new row into desired table."""
 
-from utils import session
-from SQL_models.models import Product, Purchase, Customer, ExpenseFamily, ExpenseItem, AssignedExpenseItem
+from custom.SQL_models.utils import session
+from custom.SQL_models.models import Product, Purchase, Customer, ExpenseFamily, ExpenseItem, AssignedExpenseItem
 from typing import Union, List
 
 

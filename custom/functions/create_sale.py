@@ -1,10 +1,10 @@
 """Defines sale creation function and links it to a batch utilizing FIFO exit method."""
 from datetime import datetime
-from logging import raiseExceptions
-from typing import Tuple, List
-from SQL_models.models import Sale, SaleToPurchase, Purchase
 
-from utils import session
+from typing import Tuple, List
+from custom.SQL_models.models import Sale, SaleToPurchase, Purchase
+
+from custom.SQL_models.utils import session
 import sys
 import schemas
 
