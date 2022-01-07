@@ -13,8 +13,8 @@ from sqlalchemy.sql.sqltypes import Boolean
 from typing import Dict
 
 
-import pymysql
-pymysql.install_as_MySQLdb()
+# import pymysql
+# pymysql.install_as_MySQLdb()
 
 
 app = FastAPI(title="FastAPI Project",
@@ -53,49 +53,49 @@ async def get_sale(db: Session = Depends(get_db)) -> Dict:
 
 
 @app.get("/expense_family/select/", tags=["Expense Family Table"])
-async def get_family_row(db: Session = Depends(get_db)) -> Dict:
+async def get_family(db: Session = Depends(get_db)) -> Dict:
     family = db.query(models.ExpenseFamily).all()
 
     return family
 
 
 @app.get("/expense_item/select/", tags=["Expense Item Table"])
-async def get_expense_item_row(db: Session = Depends(get_db)) -> Dict:
+async def get_expense_item(db: Session = Depends(get_db)) -> Dict:
     expense_item = db.query(models.ExpenseItem).all()
 
     return expense_item
 
 
 @app.get("/assigned_expense_item/select/", tags=["Assigned Expense Item Table"])
-async def get_assei_row(db: Session = Depends(get_db)) -> Dict:
+async def get_assei(db: Session = Depends(get_db)) -> Dict:
     assigned_expense_items = db.query(models.AssignedExpenseItem).all()
 
     return assigned_expense_items
 
 
 @app.get("/purchase/select/", tags=["Purchase Table"])
-async def get_purchase_row(db: Session = Depends(get_db)) -> Dict:
+async def get_purchase(db: Session = Depends(get_db)) -> Dict:
     purchase = db.query(models.Purchase).all()
 
     return purchase
 
 
 @app.get("/customer/select/", tags=["Customer Table"])
-async def get_customer_row(db: Session = Depends(get_db)) -> Dict:
+async def get_customer(db: Session = Depends(get_db)) -> Dict:
     customer = db.query(models.Customer).all()
 
     return customer
 
 
 @app.get("/product/select/", tags=["Product Table"])
-async def get_product_row(db: Session = Depends(get_db)) -> Dict:
+async def get_product(db: Session = Depends(get_db)) -> Dict:
     product = db.query(models.Product).all()
 
     return product
 
 
 @app.get("/sale_to_purchase/select/", tags=["Sale To Purchase Table"])
-async def get_sale_to_pur_row(db: Session = Depends(get_db)) -> Dict:
+async def get_sale_to_pur(db: Session = Depends(get_db)) -> Dict:
     sale_to_pur = db.query(models.SaleToPurchase).all()
 
     return sale_to_pur
@@ -160,6 +160,50 @@ async def get_sale_to_pur_row(stp_id: int, db: Session = Depends(get_db)) -> Dic
 
     return sale_to_pur
 
+#GET views 
+
+@app.get("/income/month/", tags=["Views month"])
+async def get_income_by_month(db: Session = Depends (get_db)) -> Dict:
+    income_by_month = db.execute("SELECT * FROM income_by_month").all()
+
+    return income_by_month
+
+@app.get("/expenses/month/", tags=["Views month"])
+async def get_expenses_by_month(db: Session = Depends (get_db)) -> Dict:
+    expenses_by_month = db.execute("SELECT * FROM expenses_by_month").all()
+
+    return expenses_by_month
+
+@app.get("/income_statement/month/", tags=["Views month"])
+async def get_income_statement_by_month(db: Session = Depends (get_db)) -> Dict:
+    income_statement_by_month = db.execute("SELECT * FROM income_statement_by_month").all()
+
+    return income_statement_by_month
+
+@app.get("/income/year/", tags=["Views year"])
+async def get_income_statement_by_year(db: Session = Depends (get_db)) -> Dict:
+    income_by_year = db.execute("SELECT * FROM income_by_year").all()
+
+    return income_by_year
+
+@app.get("/expenses/year/", tags=["Views year"])
+async def get_expenses_by_year(db: Session = Depends (get_db)) -> Dict:
+    expenses_by_year = db.execute("SELECT * FROM expenses_by_year").all()
+
+    return expenses_by_year
+
+@app.get("/income_statement/year/", tags=["Views year"])
+async def get_income_statement_by_year(db: Session = Depends (get_db)) -> Dict:
+    income_statement_by_year = db.execute("SELECT * FROM income_statement_by_year").all()
+
+    return income_statement_by_year
+
+@app.get("/revenue_growth/", tags=["Revenue growth"])
+async def get_revenue_growth(db: Session = Depends (get_db)) -> Dict:
+    revenue_growth = db.execute("SELECT * FROM revenue_growth").all()
+
+    return revenue_growth
+
 
 # POST Statements
 
@@ -217,18 +261,13 @@ async def create_family(input: schemas.ExepenseFamily) -> Dict:
     return input
 
 
-@app.post("/product/{product_id}/", tags=['Product Table'])
-async def create_product(op_input: schemas.Product) -> Dict:
-    insert_into(op_input)
-
-    return op_input
 
 # PUT request
 
 
 
 @app.put("/expense_item/update/{expense_item_id}", tags=["Expense Item Table"])
-async def put_expense_item(expense_item_id: int, inp: schemas.PutExpenseItem) -> Boolean:
+async def put_expense_item_update(expense_item_id: int, inp: schemas.PutExpenseItem) -> Boolean:
     session.query(models.ExpenseItem).filter(models.ExpenseItem.id == expense_item_id).update(
         {'item_name': inp.item_name, 'family_id': inp.family_id, 'cost': inp.cost}
     )
@@ -238,7 +277,7 @@ async def put_expense_item(expense_item_id: int, inp: schemas.PutExpenseItem) ->
 
 
 @app.put("/purchase/update/{purchase_id}", tags=["Purchase Table"])
-async def post_expense_item(purchase_id: int, inp: schemas.PutPurchase) -> Boolean:
+async def put_purchase_update(purchase_id: int, inp: schemas.PutPurchase) -> Boolean:
 
     session.query(models.Purchase).filter(models.Purchase.id == purchase_id).update(
         {'product_id': inp.product_id, 'quantity': inp.quantity, 'cost': inp.cost,
@@ -249,7 +288,7 @@ async def post_expense_item(purchase_id: int, inp: schemas.PutPurchase) -> Boole
 
 
 @app.put("/product/update/{product_id}", tags=["Product Table"])
-async def post_expense_item(product_id: int, inp: schemas.PutProduct) -> Boolean:
+async def put_product_update(product_id: int, inp: schemas.PutProduct) -> Boolean:
 
     session.query(models.Product).filter(
         models.Product.id == product_id).update({'price': inp.price})
@@ -258,7 +297,7 @@ async def post_expense_item(product_id: int, inp: schemas.PutProduct) -> Boolean
 
 
 @app.put("/expense_family/update/{family_id}", tags=["Expense Family Table"])
-async def post_expense_item(family_id: int, inp: schemas.PutExepenseFamily) -> Boolean:
+async def put_expense_family_update(family_id: int, inp: schemas.PutExepenseFamily) -> Boolean:
 
     session.query(models.ExpenseFamily).filter(models.ExpenseFamily.id == purchase_id).update(
         {'service_name': inp.service_name})
@@ -268,7 +307,7 @@ async def post_expense_item(family_id: int, inp: schemas.PutExepenseFamily) -> B
 
 
 @app.put("/customer/update/{customer_id}", tags=["Customer Table"])
-async def post_expense_item(customer_id: int, inp: schemas.PutCustomer) -> Boolean:
+async def put_customer_update(customer_id: int, inp: schemas.PutCustomer) -> Boolean:
 
     session.query(models.Customer).filter(models.Customer.id == customer_id).update(
         {'name': inp.name, 'surname': inp.surname, 'email': inp.email, 'phone_number': inp.phone_number})
@@ -278,7 +317,7 @@ async def post_expense_item(customer_id: int, inp: schemas.PutCustomer) -> Boole
 
 
 @app.put("/assigned_expense_item/update/{assei_id}", tags=["Assigned Expense Item Table"])
-async def post_expense_item(assei_id: int, inp: schemas.PutAssignedExpenseItem) -> Boolean:
+async def put_assei_update(assei_id: int, inp: schemas.PutAssignedExpenseItem) -> Boolean:
 
     session.query(models.AssignedExpenseItem).filter(models.AssignedExpenseItem.id == id).update(
         {'item_id': inp.item_id, 'state': inp.state, 'created_at': inp.created_at}

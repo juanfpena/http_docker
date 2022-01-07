@@ -6,10 +6,11 @@ from custom.SQL_models.utils import engine
 
 income_statement_by_month = "SQL_views/income_statement_by_month.sql"
 income_statement_by_year = "SQL_views/income_statement_by_year.sql"
-# revenue_evolution = "SQL_views/revenue_growth.sql"
+revenue_evolution = "SQL_views/revenue_growth.sql"
 
 views_list = [income_statement_by_month,
-              income_statement_by_year]
+              income_statement_by_year,
+              revenue_evolution]
 
 
 def sql_parser(file_path: str) -> list[str]:
